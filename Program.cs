@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDataProtection();
+builder.Services.AddSingleton<IPostConfigureOptions<KeyManagementOptions>, PostConfigureKeyManagementOptions>();
 var app = builder.Build();
 
 var instanceId = Guid.NewGuid();
